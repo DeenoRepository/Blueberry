@@ -7,13 +7,21 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Blueberry.Client.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Blueberry.Client">
+        Title="Blueberry.Client"
+		ExtendClientAreaToDecorationsHint="True">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
 	<Grid>
-		<rxui:RoutedViewHost x:Name="RoutedViewHost"/>
+		<Panel Grid.Column="0" Background="AliceBlue"/>
+		
+		<rxui:RoutedViewHost x:Name="RoutedViewHost" Grid.Column="1"/>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="50"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
 	</Grid>
 </Window>
