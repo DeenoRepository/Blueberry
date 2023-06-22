@@ -6,5 +6,7 @@ namespace Blueberry.API.Data
     {
         public BlueberryAPIContext(DbContextOptions<BlueberryAPIContext> options)
             : base(options) { }
+
+        public DbSet<Blueberry.API.Models.StockItem> StockItem { get; set; } = default!;
     }
 }
