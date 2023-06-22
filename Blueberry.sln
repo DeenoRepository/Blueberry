@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blueberry.Client", "Blueberry.Client\Blueberry.Client.csproj", "{748A04A0-394B-4220-B235-CF2C529B4C51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blueberry.Client", "Blueberry.Client\Blueberry.Client.csproj", "{748A04A0-394B-4220-B235-CF2C529B4C51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blueberry.API", "Blueberry.API\Blueberry.API.csproj", "{6B66BFBB-A452-4370-BEC2-D5D88ABDC27C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{748A04A0-394B-4220-B235-CF2C529B4C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{748A04A0-394B-4220-B235-CF2C529B4C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{748A04A0-394B-4220-B235-CF2C529B4C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B66BFBB-A452-4370-BEC2-D5D88ABDC27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B66BFBB-A452-4370-BEC2-D5D88ABDC27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B66BFBB-A452-4370-BEC2-D5D88ABDC27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B66BFBB-A452-4370-BEC2-D5D88ABDC27C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
