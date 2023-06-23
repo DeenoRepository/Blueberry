@@ -1,4 +1,5 @@
 ﻿using Avalonia.Collections;
+using Avalonia.Input;
 using Blueberry.Client.Models;
 using Blueberry.Client.Services;
 using ReactiveUI;
@@ -32,15 +33,15 @@ namespace Blueberry.Client.ViewModels
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-            StockItems = new ObservableCollection<StockItem>(new Database().GetStockItems());
+            StockItems = new Database().GetStockItems();
             FilterField = String.Empty;
 
-            OnFilteringRequired = ReactiveCommand.Create(() => 
+            OnFilteringRequired = ReactiveCommand.Create(() =>
             {
                 StockItems.Clear();
 
-                foreach (StockItem stockItem in new Database().GetStockItems().Where(x => x.Type.Contains(FilterField, StringComparison.OrdinalIgnoreCase) ||
-                                                                                          x.Description.Contains(FilterField, StringComparison.OrdinalIgnoreCase)))
+                foreach (StockItem stockItem in new Database().GetStockItems().Where(x => x.Type!.Contains(FilterField, StringComparison.OrdinalIgnoreCase) ||
+                                                                      x.Description!.Contains(FilterField, StringComparison.OrdinalIgnoreCase)))
                 {
                     StockItems.Add(stockItem);
                 }

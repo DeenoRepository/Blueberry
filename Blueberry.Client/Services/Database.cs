@@ -1,40 +1,43 @@
 ﻿using Blueberry.Client.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Blueberry.Client.Services
 {
     public class Database
     {
-        public IEnumerable<StockItem> GetStockItems() => new[]
+        private HttpClient _client;
+
+        public Database() 
         {
-            new StockItem
+            _client = new HttpClient();
+        }
+
+        public ObservableCollection<StockItem> GetStockItems() 
+        {
+            HttpResponseMessage response = _client.GetAsync("http://localhost:5000/api/StockItems").Result;
+
+            if (response.IsSuccessStatusCode)
             {
-                Id = 1,
-                Category = "Радиодетали",
-                Type = "Конденсатор",
-                Description = "Электролитический, 16В, 20мФ",
-                Amount = 10
-            },
-            new StockItem
-            {
-                Id = 2,
-                Category = "Радиодетали",
-                Type = "Резистор",
-                Description = "Проволочный, 10кОм, 1Вт",
-                Amount = 10
-            },
-            new StockItem
-            {
-                Id = 3,
-                Category = "Радиодетали",
-                Type = "Диод",
-                Description = "Шоттки, 1N4148",
-                Amount = 10
-            },
-        };
+                string json = response.Content.ReadAsStringAsync().Result;
+
+                var result = JsonSerializer.Deserialize<ObservableCollection<StockItem>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true});
+
+                if (result != null )
+                {
+                    return result;
+                }
+            }
+
+            return new ObservableCollection<StockItem>(); ;
+        }
+        
     }
 }
