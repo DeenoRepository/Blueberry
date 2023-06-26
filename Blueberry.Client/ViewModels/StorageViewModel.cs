@@ -1,7 +1,10 @@
-﻿using Avalonia.Collections;
+﻿using Avalonia;
+using Avalonia.Collections;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Blueberry.Client.Models;
 using Blueberry.Client.Services;
+using Blueberry.Client.Views;
 using ReactiveUI;
 using Splat;
 using System;
@@ -23,6 +26,8 @@ namespace Blueberry.Client.ViewModels
 
         public IScreen HostScreen { get; }
 
+        public ReactiveCommand<Unit, Unit> LoadStorageManagementPage { get; }
+
         public ReactiveCommand<Unit, Unit> OnFilteringRequired { get; }
 
         public ObservableCollection<StockItem> StockItems { get; set; }
@@ -33,14 +38,16 @@ namespace Blueberry.Client.ViewModels
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-            StockItems = new Database().GetStockItems();
+            StockItems = new BlueberryAPI().GetStockItems();
             FilterField = String.Empty;
+
+            LoadStorageManagementPage = ReactiveCommand.Create(() => { HostScreen.Router.Navigate.Execute(new StorageManagerViewModel(screen)); });
 
             OnFilteringRequired = ReactiveCommand.Create(() =>
             {
                 StockItems.Clear();
 
-                foreach (StockItem stockItem in new Database().GetStockItems().Where(x => x.Type!.Contains(FilterField, StringComparison.OrdinalIgnoreCase) ||
+                foreach (StockItem stockItem in new BlueberryAPI().GetStockItems().Where(x => x.Type!.Contains(FilterField, StringComparison.OrdinalIgnoreCase) ||
                                                                       x.Description!.Contains(FilterField, StringComparison.OrdinalIgnoreCase)))
                 {
                     StockItems.Add(stockItem);

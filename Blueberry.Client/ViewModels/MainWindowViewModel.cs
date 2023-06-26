@@ -12,6 +12,7 @@ namespace Blueberry.Client.ViewModels
         {
             Locator.CurrentMutable.Register(() => new StartupView(), typeof(IViewFor<StartupViewModel>));
             Locator.CurrentMutable.Register(() => new StorageView(), typeof(IViewFor<StorageViewModel>));
+            Locator.CurrentMutable.Register(() => new StorageManagerView(), typeof(IViewFor<StorageManagerViewModel>));
 
             Router = new RoutingState();
             Router.Navigate.Execute(new StorageViewModel(this));
