@@ -3,8 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Blueberry.Client.Views.StartupView">
-	<StackPanel>
-		<Label Content="Startup Page" FontSize="20" FontWeight="Bold"/>
-	</StackPanel>
+             x:Class="Blueberry.Client.Views.ReportsView">
+	<DockPanel Margin="10">
+		<Label Content="Отчеты" FontSize="20" FontWeight="Bold" Grid.Row="0"/>
+	</DockPanel>
 </UserControl>

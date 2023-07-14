@@ -4,9 +4,9 @@ using Blueberry.Client.ViewModels;
 
 namespace Blueberry.Client.Views
 {
-    public partial class StartupView : ReactiveUserControl<StartupViewModel>
+    public partial class DashboardView : ReactiveUserControl<DashboardViewModel>
     {
-        public StartupView()
+        public DashboardView()
         {
             InitializeComponent();
         }

@@ -1,0 +1,49 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="600"
+             x:Class="Blueberry.Client.Views.DashboardView">
+	<Grid>
+		<Border Padding="10" CornerRadius="10" Grid.Row="0">
+			<StackPanel>
+				<Label Content="Панель управления" FontSize="20" FontWeight="Bold" Margin="0 0 0 20"/>
+				<DockPanel Margin="0 0 0 20">
+					<Button Content="Добавить позицию" Margin="0 0 5 0"/>
+					<Button Content="Выдать позицию" Margin="0 0 5 0"/>
+					<Button Content="Переместить позицию"/>
+				</DockPanel>
+			</StackPanel>
+		</Border>
+
+		<Border Padding="10" CornerRadius="10" Grid.Row="1">
+			<StackPanel>
+				<Label Content="История операций" FontSize="20" FontWeight="Bold" Margin="0 0 0 20"/>
+				<Grid>
+					<DataGrid Items="{Binding StockItems}" AutoGenerateColumns="False" Grid.Row="0" Margin="0 5 0 0">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Дата"/>
+							<DataGridTextColumn Header="Категория"/>
+							<DataGridTextColumn Header="Тип"/>
+							<DataGridTextColumn Header="Наименование"/>
+							<DataGridTextColumn Header="Количество"/>
+							<DataGridTextColumn Header="Склад №"/>
+							<DataGridTextColumn Header="Примечание"/>
+						</DataGrid.Columns>
+					</DataGrid>
+
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+				</Grid>
+			</StackPanel>
+		</Border>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+	</Grid>
+</UserControl>

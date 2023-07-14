@@ -4,9 +4,9 @@ using Blueberry.Client.ViewModels;
 
 namespace Blueberry.Client.Views
 {
-    public partial class StorageManagerView : ReactiveUserControl<StorageManagerViewModel>
+    public partial class InventoryView : ReactiveUserControl<InventoryViewModel>
     {
-        public StorageManagerView()
+        public InventoryView()
         {
             InitializeComponent();
         }

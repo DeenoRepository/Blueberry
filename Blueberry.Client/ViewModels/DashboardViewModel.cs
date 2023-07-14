@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Blueberry.Client.ViewModels
 {
-    public class StartupViewModel : ReactiveObject, IRoutableViewModel
+    public class DashboardViewModel : ReactiveObject, IRoutableViewModel
     {
-        public string UrlPathSegment => "StartupPage";
+        public string UrlPathSegment => "DashboardPage";
 
         public IScreen HostScreen { get; }
 
-        public StartupViewModel(IScreen? screen)
+        public DashboardViewModel(IScreen? screen)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
         }

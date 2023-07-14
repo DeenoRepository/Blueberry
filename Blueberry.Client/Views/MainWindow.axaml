@@ -4,7 +4,7 @@
         xmlns:vm="using:Blueberry.Client.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
         x:Class="Blueberry.Client.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Blueberry.Client"
@@ -15,13 +15,33 @@
     </Design.DataContext>
 
 	<Grid>
-		<Panel Grid.Column="0" Background="AliceBlue"/>
-		
-		<rxui:RoutedViewHost x:Name="RoutedViewHost" Grid.Column="1"/>
+		<DockPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Margin="0 10">
+			<Label Content="Blueberry" FontFamily="Days One" FontSize="20"/>
+		</DockPanel>
+
+		<Panel Background="AliceBlue" Grid.Column="0" Grid.Row="1">
+			<StackPanel>
+				<StackPanel Margin="15 10">
+					<Label Content="Общее" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Button Content=" • Поиск по складу" Background="Transparent" Command="{Binding LoadInventoryPage}"/>
+				</StackPanel>
+				<StackPanel Margin="15 10">
+					<Label Content="Склад" FontSize="16" FontWeight="Bold" Margin="5"/>
+					<Button Content=" • Панель управления" Background="Transparent" Command="{Binding LoadDashboardPage}"/>
+					<Button Content=" • Отчеты" Background="Transparent" Command="{Binding LoadReportsPage}"/>
+				</StackPanel>
+			</StackPanel>
+		</Panel>
+			
+		<rxui:RoutedViewHost x:Name="RoutedViewHost" Grid.Column="1" Grid.Row="1"/>
 
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="50"/>
+			<ColumnDefinition Width="210"/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
 	</Grid>
 </Window>

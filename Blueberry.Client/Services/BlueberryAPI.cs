@@ -61,15 +61,15 @@ namespace Blueberry.Client.Services
             {
                 new ItemCategory {
                     Id = 0,
-                    Name = "Radio Components"
+                    Name = "Радиодетали"
                 },
                 new ItemCategory {
                     Id = 1,
-                    Name = "Instruments"
+                    Name = "Инструменты"
                 },
                 new ItemCategory {
                     Id = 2,
-                    Name = "Devices"
+                    Name = "Устройства"
                 }
             };
 
@@ -83,31 +83,31 @@ namespace Blueberry.Client.Services
                 new ItemType
                 {
                     Id = 0,
-                    Name = "Resistor",
+                    Name = "Резистор",
                     Category = 0
                 },
                 new ItemType
                 {
                     Id = 1,
-                    Name = "Capacitor",
+                    Name = "Конденсатор",
                     Category = 0
                 },
                 new ItemType
                 {
                     Id = 2,
-                    Name = "Diode",
+                    Name = "Диод",
                     Category = 0
                 },
                 new ItemType
                 {
                     Id = 3,
-                    Name = "Stripper",
+                    Name = "Бокорезы",
                     Category = 1
                 },
                 new ItemType
                 {
                     Id = 4,
-                    Name = "PLC",
+                    Name = "ПЛК",
                     Category = 2
                 },
             };
