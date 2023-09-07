@@ -19,6 +19,7 @@ namespace Blueberry.Client.ViewModels
             Locator.CurrentMutable.Register(() => new InventoryView(), typeof(IViewFor<InventoryViewModel>));
             Locator.CurrentMutable.Register(() => new DashboardView(), typeof(IViewFor<DashboardViewModel>));
             Locator.CurrentMutable.Register(() => new ReportsView(), typeof(IViewFor<ReportsViewModel>));
+            
 
             Router = new RoutingState();
             Router.Navigate.Execute(new InventoryViewModel(this));

@@ -45,15 +45,41 @@ namespace Blueberry.Client.Services
 
         public bool AddStockItem(StockItem stockItem)
         {
-            HttpResponseMessage message =  _client.PostAsync(_host + "StockItems", new StringContent(JsonSerializer.Serialize<StockItem>(stockItem), Encoding.UTF8, "application/json")).Result;
+            HttpResponseMessage response =  _client.PostAsync(_host + "StockItems", new StringContent(JsonSerializer.Serialize<StockItem>(stockItem), Encoding.UTF8, "application/json")).Result;
 
-            if (message.IsSuccessStatusCode) 
+            if (response.IsSuccessStatusCode) 
             {
                 return true;
             }
 
             return false;
         } 
+
+        public StockItem GetStockItem(int id)
+        {
+            HttpResponseMessage response = _client.GetAsync(_host + "StockItems/" + id).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+
+                return JsonSerializer.Deserialize<StockItem>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+
+            return new StockItem();
+        }
+
+        public bool TakeStockItem(StockItem stockItem, int amount) 
+        {
+            HttpResponseMessage response = _client.PutAsync(_host + "StockItems/" + stockItem.Id, new StringContent(JsonSerializer.Serialize<StockItem>(stockItem), Encoding.UTF8, "application/json")).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         public ObservableCollection<ItemCategory> GetCategoryList()
         {
