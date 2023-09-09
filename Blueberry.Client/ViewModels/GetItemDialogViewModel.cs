@@ -18,24 +18,56 @@ namespace Blueberry.Client.ViewModels
 {
     public class GetItemDialogViewModel : ReactiveObject, IScreen
     {
+        private BlueberryAPI _blueberryApi;
+
         public RoutingState Router { get; }
 
         public ReactiveCommand<Unit, Unit> TakeStockItem { get; }
 
-        public int IdField { get; set; }
-        public int AmountField { get; set; }
+        private int _idField;
+        public int IdField
+        {
+            get => _idField;
+            set => this.RaiseAndSetIfChanged(ref _idField, value);
+        }
+
+        private int _amountField;
+        public int AmountField
+        {
+            get => _amountField;
+            set => this.RaiseAndSetIfChanged(ref _amountField, value);
+        }
+
+        private string? _errorMessage;
+        public string? ErrorMessage
+        {
+            get => _errorMessage;
+            set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
+        }
 
         public GetItemDialogViewModel()
         {
+            _blueberryApi = new BlueberryAPI();
+
             Router = new RoutingState();
 
             TakeStockItem = ReactiveCommand.Create(() => 
             {
                 StockItem stockItem = new BlueberryAPI().GetStockItem(IdField);
 
-                if (stockItem.Amount >= AmountField) 
+                if (IdField != 0 && AmountField != 0) 
                 {
-                    new BlueberryAPI().TakeStockItem(stockItem, AmountField);
+                    if (_blueberryApi.TakeStockItem(stockItem, AmountField))
+                    {
+                        IdField = 0;
+                        AmountField = 0;
+
+                        ErrorMessage = String.Empty;
+                    }
+                }
+                else 
+                {
+                    ErrorMessage = "Пожалуйста заполните все поля";
                 }
             });
         }

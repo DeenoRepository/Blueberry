@@ -5,16 +5,17 @@
 		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 		xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 		xmlns:binds="using:Reactive.Bindings.Interactivity"
-        mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="500"
+        mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="515"
         x:Class="Blueberry.Client.Views.AddItemDialogView"
         Title="AddItemDialogView"
-		Height="500"
+		Height="515"
 		Width="390"
+		SizeToContent="Height"
 		ExtendClientAreaToDecorationsHint="True">
 	
-	<Border Padding="10" CornerRadius="10" Width="500" HorizontalAlignment="Left" Grid.Row="2">
+	<Border Padding="10" CornerRadius="10" Width="390" HorizontalAlignment="Left" Grid.Row="2">
 		<StackPanel >
-			<Label Content="Добавить товар" FontSize="20" FontWeight="Bold" Margin="0 0 0 20"/>
+			<Label Content="Добавить позицию" FontSize="20" FontWeight="Bold" Margin="0 0 0 20"/>
 			<StackPanel Margin="10 0">
 				<StackPanel>
 					<Label Content="Категория"/>
@@ -49,14 +50,17 @@
 				</StackPanel>
 				<StackPanel>
 					<Label Content="Описание"/>
-					<TextBox Text="{Binding DescriptionField, Mode=TwoWay}" Margin="0 0 0 10" Width="350" Height="100" HorizontalAlignment="Left"/>
+					<TextBox  Text="{Binding DescriptionField, Mode=TwoWay}" Margin="0 0 0 10" Width="350" Height="100" HorizontalAlignment="Left"/>
 				</StackPanel>
 				<StackPanel>
 					<Label Content="Количество"/>
 					<TextBox Text="{Binding AmountField, Mode=TwoWay}" Margin="0 0 0 10" Width="350" HorizontalAlignment="Left"/>
 				</StackPanel>
+				<Label Content="{Binding ErrorMessage}" Foreground="Red" Margin="0 0 0 10"  HorizontalAlignment="Center"/>
 				<Button Content="Добавить" Command="{Binding AddItem}" Width="350" HorizontalContentAlignment="Center"/>
 			</StackPanel>
 		</StackPanel>
 	</Border>
 </Window>
+
+

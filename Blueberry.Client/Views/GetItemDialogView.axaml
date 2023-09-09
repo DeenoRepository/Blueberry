@@ -2,11 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="370"
+        mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="385"
         x:Class="Blueberry.Client.Views.GetItemDialogView"
         Title="GetItemDialogView"
-		Height="370"
+		Height="385"
 		Width="390"
+		SizeToContent="Height"
 		ExtendClientAreaToDecorationsHint="True">
 	
 	<Border Padding="10" CornerRadius="10" Width="500" HorizontalAlignment="Left" Grid.Row="2">
@@ -26,6 +27,7 @@
 					<Label Content="Примечание"/>
 					<TextBox Margin="0 0 0 10" Width="350" Height="100" HorizontalAlignment="Left"/>
 				</StackPanel>
+				<Label Content="{Binding ErrorMessage}" Foreground="Red" Margin="0 0 0 10"  HorizontalAlignment="Center"/>
 				<Button Content="Выдать" Command="{Binding TakeStockItem}" Width="350" HorizontalContentAlignment="Center"/>
 			</StackPanel>
 		</StackPanel>

@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -40,14 +41,27 @@ namespace Blueberry.Client.Services
                 }
             }
 
-            return new ObservableCollection<StockItem>(); ;
+            return new ObservableCollection<StockItem>();
         }
 
         public bool AddStockItem(StockItem stockItem)
         {
-            HttpResponseMessage response =  _client.PostAsync(_host + "StockItems", new StringContent(JsonSerializer.Serialize<StockItem>(stockItem), Encoding.UTF8, "application/json")).Result;
+            HttpResponseMessage response = new HttpResponseMessage();
 
-            if (response.IsSuccessStatusCode) 
+            var equalStockItem = GetStockItems().Single(x => x.Description == stockItem.Description && x.PartName == stockItem.PartName && x.Category == stockItem.Category);
+
+            if ( equalStockItem != null ) 
+            {
+                equalStockItem.Amount += stockItem.Amount;
+
+                response = _client.PutAsync(_host + "StockItems/" + equalStockItem.Id, new StringContent(JsonSerializer.Serialize<StockItem>(equalStockItem), Encoding.UTF8, "application/json")).Result;
+            }
+            else
+            {
+                response = _client.PostAsync(_host + "StockItems", new StringContent(JsonSerializer.Serialize<StockItem>(stockItem), Encoding.UTF8, "application/json")).Result;
+            }
+
+            if (response.IsSuccessStatusCode)
             {
                 return true;
             }
@@ -71,11 +85,18 @@ namespace Blueberry.Client.Services
 
         public bool TakeStockItem(StockItem stockItem, int amount) 
         {
-            HttpResponseMessage response = _client.PutAsync(_host + "StockItems/" + stockItem.Id, new StringContent(JsonSerializer.Serialize<StockItem>(stockItem), Encoding.UTF8, "application/json")).Result;
+            StockItem equalStockItem = GetStockItem(stockItem.Id);
 
-            if (response.IsSuccessStatusCode)
+            if (equalStockItem.Amount >= amount) 
             {
-                return true;
+                equalStockItem.Amount -= amount;
+
+                HttpResponseMessage response = _client.PutAsync(_host + "StockItems/" + equalStockItem.Id, new StringContent(JsonSerializer.Serialize<StockItem>(equalStockItem), Encoding.UTF8, "application/json")).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
             }
 
             return false;
